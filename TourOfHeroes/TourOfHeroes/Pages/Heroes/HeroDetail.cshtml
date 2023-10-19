@@ -1,0 +1,29 @@
+@page
+@using TourOfHeroes.Services
+@using TourOfHeroes.Models
+@model TourOfHeroes.Pages.Heroes.HeroDetailModel
+@{
+    ViewData["Title"] = "Hero Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h2>@Model.Hero.Name Details</h2>
+    <div><span>id: </span>@Model.Hero.Id</div>
+
+
+    <!-- Save button -->
+    <form method="post" asp-page-handler="Save">
+        <div>
+            <label for="hero-name">Hero Name: </label>
+            <input id="hero-name" name="Name" value="@Model.Hero.Name" placeholder="Hero name" />
+        </div>
+        <input type="hidden" name="Id" value="@Model.Hero.Id" />
+        <input type="submit" value="Save" />
+    </form>
+
+    <!-- Go Back button -->
+    <form method="get" asp-page="/HeroSearch">
+        <input type="submit" value="Go Back" />
+    </form>
+</div>

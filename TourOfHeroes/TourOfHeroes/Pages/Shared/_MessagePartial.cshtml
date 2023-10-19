@@ -1,0 +1,11 @@
+@if (Model != null && Model.Count > 0)
+{
+    <div>
+        <h2>Messages</h2>
+        @foreach (var message in Model)
+        {
+            <div>@message</div>
+        }
+        }
+    </div>
+}

@@ -1,0 +1,39 @@
+@page
+@model MyHeroesModel
+@{
+    ViewData["Title"] = "My Heroes";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>My Heroes</h2>
+
+<div>
+    <form method="post" asp-page="/Heroes/MyHeroes" asp-page-handler="Add">
+        <label for="new-hero">Hero name: </label>
+        <input id="new-hero" asp-for="newHeroName" placeholder="Enter hero name" />
+        <button type="submit" class="add-button">Add Hero</button>
+    </form>
+</div>
+
+
+<div>
+@if (Model.Heroes == null || Model.Heroes.Count == 0)
+{
+    Model.Heroes = new List<Models.Hero>();
+}
+
+@foreach (var hero in Model.Heroes)
+{
+    <ul style="list-style-type: none;">
+        <li style="display: flex; align-items: center;">
+            <a asp-page="/Heroes/HeroDetail" asp-route-id="@hero.Id">
+                <button type="submit" class="hero-button">(@hero.Id) @hero.Name</button>
+            </a>
+            <form method="post" asp-page="/Heroes/MyHeroes" asp-page-handler="Delete">
+                <input type="hidden" name="id" value="@hero.Id" />
+                <button type="submit" class="delete-button">Delete</button>
+            </form>
+        </li>
+    </ul>
+}
+</div>

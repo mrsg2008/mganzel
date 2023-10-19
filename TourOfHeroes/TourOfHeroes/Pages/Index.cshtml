@@ -1,0 +1,24 @@
+@page "/"
+@using TourOfHeroes.Pages
+@model IndexModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Top Heroes</h2>
+<div class="hero-list">
+  @if (Model.TopHeroes != null)
+  {
+    foreach (var hero in Model.TopHeroes.Take(5))
+    {
+        <ul style="list-style-type: none;">
+            <li style="display: flex; align-items: center;">
+              <a asp-page="/Heroes/HeroDetail" asp-route-id="@hero.Id">
+                <button type="submit" class="hero-button">@hero.Name</button>
+              </a>
+            </li>
+        </ul>
+    }
+  }
+</div>

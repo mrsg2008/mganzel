@@ -1,0 +1,32 @@
+@page
+@model TourOfHeroes.Pages.HeroSearchModel
+@{
+    ViewData["Title"] = "Hero Search";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<h2>Hero Search</h2>
+
+<form method="get">
+    <input type="text" asp-for="SearchTerm" placeholder="Search for a hero...">
+    <button type="submit">Search</button>
+</form>
+
+<div>
+    @if (Model.Suggestions != null && Model.Suggestions.Any())
+    {
+        <ul>
+            @foreach (var suggestion in Model.Suggestions)
+            {
+                <li>
+                    <a asp-page="/Heroes/HeroDetail" asp-route-id="@suggestion.Id">
+                        <button type="submit" class="hero-button">@suggestion.Name</button>
+                    </a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No suggestions yet.</p>
+    }
+</div>

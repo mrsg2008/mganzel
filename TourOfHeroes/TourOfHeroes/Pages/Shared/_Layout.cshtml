@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+@inject TourOfHeroes.Services.IMessageService MessageService
+<head>
+    <title>Tour of Heroes</title>
+</head>
+<body>
+    <header>
+        <h1>Tour of Heroes</h1>
+        <form method="get" asp-page="/Index">
+    <button type="submit">Dashboard</button>
+</form>
+
+<form method="get" asp-page="/Heroes/MyHeroes">
+    <button type="submit">Heroes</button>
+</form>
+
+<form method="get" asp-page="/HeroSearch">
+    <button type="submit">Hero Search</button>
+</form>
+
+
+    </header>
+    
+    <div>
+        <main>
+            @RenderBody()
+        </main>
+    </div>
+    
+   <footer>
+    <form onsubmit="console.log('Form submitted')" method="post" asp-page="/Messages/Messages" asp-page-handler="OnPost">
+    <button type="submit">Clear Messages</button>
+</form>
+
+    @{
+        var messages = (List<string>)ViewData["Messages"];
+    }
+    @await Html.PartialAsync("_MessagePartial", messages)
+
+    @if (Model.Messages != null && Model.Messages.Count > 0)
+    {
+        <div>
+            <h2>Messages</h2>
+            @foreach (var message in Model.Messages)
+            {
+                <div>@message</div>
+            }
+        </div>
+    }
+</footer>
+</body>
+</html>

@@ -1,0 +1,13 @@
+@page
+@model MessagesModel
+
+@if (Model.MessageService.Messages.Count > 0)
+{
+    <div>
+        <h2>Messages</h2>
+        @foreach (var message in Model.MessageService.Messages)
+        {
+            <div>@message</div>
+        }
+    </div>
+}
